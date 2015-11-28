@@ -6,45 +6,31 @@
  * Time: 9:39 PM
  */
 error_reporting('no');
+session_start();
 include('navbar.php');
 include('database.php');
 include('pdo.php');
 
+$em_id = $_GET['e_id'];
+$_SESSION[$em_id] = $em_id;
+
 
 $dbconnection = $connection_object->connection('localhost', $dbusername, $dbpassword, $dbname);
 
-$em_id = $_GET['e_id'];
+
 
 if(isset($em_id)){
 
-    $data = "SELECT * FROM add_employee WHERE e_id='$em_id'";
-
-//    $select = $_POST['role_employee'];
-//    $eid = $_POST['e_id'];
-//    $name = $_POST['name'];
-//    $age = $_POST['age'];
-//    $department = $_POST['department'];
-//    $salary = $_POST['salary'];
-//    $image = $_POST['image'];
-//    $email = $_POST['email'];
-//    $password = $_POST['password'];
-
-//    if( !empty(trim($select)) && !empty(trim($eid)) && !empty(trim($name)) && !empty(trim($age)) && !empty(trim($department))
-//        && !empty(trim($salary)) && !empty(trim($image)) && !empty(trim($email)) &&  !empty(trim($password))){
-//
-//        $insert = "INSERT INTO `add_employee`( `role_employee`, `e_id`, `name`, `age`, `department`, `salary`, `image`, `email`, `password`) VALUES                            ('$select', '$eid', '$name', '$age', '$department', '$salary', '$image', '$email', '$password')";
-//
-//        $preparestatement = $dbconnection->prepare($insert);
-//        $preparestatement->execute();
-//
-//        echo "<script>alert ('successfully inserted');</script>";
-//
-//    }else{
-//
-//        echo "you have to fill up all fields";
-//    }
+    $view = "SELECT * FROM add_employee WHERE e_id='$em_id'";
+    $data = $dbconnection->query($view);
+    $row = $data->fetch(PDO::FETCH_ASSOC);
+//    echo $row['id'];
+//        die();
 
 }
+
+
+
 ?>
 
 <!doctype html>
@@ -57,7 +43,7 @@ if(isset($em_id)){
 <body>
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <form action="#" method="POST" role="form">
+        <form action="updated_employee_data.php" method="POST" role="form">
             <legend>Add Employee</legend>
 
 
@@ -75,7 +61,8 @@ if(isset($em_id)){
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Employee ID</label>
-                        <input type="text" class="form-control" name="e_id" id="" value="">
+                        <input type="text" class="form-control" name="e_id" id="" value="<?php echo $row['e_id'];?>">
+                        <input type="hidden" class="form-control" name="id" id="" value="<?php echo $row['id'];?>">
                     </div>
                 </div>
             </div>
@@ -84,14 +71,14 @@ if(isset($em_id)){
 
                     <div class="form-group">
                         <label for="">Name</label>
-                        <input type="text" class="form-control" name="name" id="" value="">
+                        <input type="text" class="form-control" name="name" id="" value="<?php echo $row['name'];?>">
                     </div>
                 </div>
                 <div class="col-md-6">
 
                     <div class="form-group">
                         <label for="">Age</label>
-                        <input type="text" class="form-control" name="age" id="" value="">
+                        <input type="text" class="form-control" name="age" id="" value="<?php echo $row['age'];?>">
                     </div>
                 </div>
             </div>
@@ -113,21 +100,21 @@ if(isset($em_id)){
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Salary</label>
-                        <input type="text" class="form-control" name="salary" id="" value="Salary">
+                        <input type="text" class="form-control" name="salary" id="" value="<?php echo $row['salary'];?>">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="">Image</label>
-                <input type="file" class="form-control" name="image" id="" value="Email">
+                <input type="file" class="form-control" name="image" id="" value="<?php echo $row['image'];?>">
             </div>
             <div class="form-group">
                 <label for="">Email</label>
-                <input type="text" class="form-control" name="email" id="" value="Email">
+                <input type="text" class="form-control" name="email" id="" value="<?php echo $row['email'];?>">
             </div>
             <div class="form-group">
                 <label for="">Password</label>
-                <input type="text" class="form-control" name="password" id="" value="Password">
+                <input type="text" class="form-control" name="password" id="" value="<?php echo $row['password'];?>">
             </div>
 
 

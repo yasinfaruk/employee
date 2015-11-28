@@ -52,6 +52,7 @@ $data = $dbconnection->query($view);
                         <button type="submit" class="btn btn-default">Submit</button>
                     </div>
                 </div>
+                <div class="col-md-4"></div>
                 <div class="col-md-6">
 
                     <div class="form-group">
@@ -81,39 +82,43 @@ $data = $dbconnection->query($view);
         <table class="table table-bordered table-hover">
         	<thead class="text-center">
         		<tr>
-        			<th class="text-center">SL</th>
-                    <th class="text-center">Role</th>
-        			<th class="text-center">E-Id</th>
-        			<th class="text-center">Name</th>
-        			<th class="text-center">Age</th>
-        			<th class="text-center">Dept.</th>
-        			<th class="text-center">Salary</th>
-        			<th class="text-center">Email</th>
-        			<th class="text-center">Password</th>
-        			<th class="text-center">Action</th>
+                            <th class="text-center">Num</th>
+                            <!--<th class="text-center">SL</th>-->
+                            <th class="text-center">Role</th>
+                            <th class="text-center">E-Id</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Age</th>
+                            <th class="text-center">Dept.</th>
+                            <th class="text-center">Salary</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Password</th>
+                            <th class="text-center">Action</th>
         		</tr>
         	</thead>
         	<tbody>
 
             <?php
+            $x = 0;
             while ($row = $data->fetch(PDO::FETCH_ASSOC)){
+              $x++;
             ?>
-        		<tr class="text-center">
-                    <td><?php echo $row['id']?></td>
-                    <td><?php echo $row['role_employee']?></td>
-                    <td><?php echo $row['e_id']?></td>
-                    <td><?php echo $row['name']?></td>
-                    <td><?php echo $row['age']?></td>
-                    <td><?php echo $row['department']?></td>
-                    <td><?php echo $row['salary']?></td>
-<!--                    <td>--><?php //echo $row['image']?><!--</td>-->
-                    <td><?php echo $row['email']?></td>
-                    <td><?php echo $row['password']?></td>
-                    <td>
-                        <span><a href="single_employee_data.php?e_id=<?php echo $row['e_id']?>" style="text-decoration: none;">View</a></span>&nbsp;
-                        <span><a class="text-danger" href="update_employee.php?e_id=<?php echo $row['e_id']?>" style="text-decoration: none;">Update</a></span>
-                    </td>
-        		</tr>
+                    <tr class="text-center">
+                        <td><?php echo $x;?></td>
+                        <!--<td><?php echo $row['id']?></td>-->
+                        <td><?php echo $row['role_employee']?></td>
+                        <td><?php echo $row['e_id']?></td>
+                        <td><?php echo $row['name']?></td>
+                        <td><?php echo $row['age']?></td>
+                        <td><?php echo $row['department']?></td>
+                        <td><?php echo $row['salary']?></td>
+        <!--                    <td>--><?php //echo $row['image']?><!--</td>-->
+                        <td><?php echo $row['email']?></td>
+                        <td><?php echo $row['password']?></td>
+                        <td>
+                            <span><a href="single_employee_data.php?e_id=<?php echo $row['e_id']?>" style="text-decoration: none;">View</a></span>&nbsp;
+                            <span><a class="text-danger" href="update_employee.php?e_id=<?php echo $row['e_id']?>" style="text-decoration: none;">Update</a></span>
+                        </td>
+                    </tr>
             <?php } ?>
         	</tbody>
         </table>
