@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.12deb2
+-- version 4.2.12deb2+deb8u1build0.15.04.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 19, 2015 at 06:45 AM
--- Server version: 5.6.25-0ubuntu0.15.04.1
--- PHP Version: 5.6.4-4ubuntu6.3
+-- Generation Time: Nov 29, 2015 at 06:11 AM
+-- Server version: 5.6.27-0ubuntu0.15.04.1
+-- PHP Version: 5.6.4-4ubuntu6.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -37,18 +37,23 @@ CREATE TABLE IF NOT EXISTS `add_employee` (
   `image` varchar(20) NOT NULL,
   `email` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `add_employee`
 --
 
 INSERT INTO `add_employee` (`id`, `role_employee`, `e_id`, `name`, `age`, `department`, `salary`, `image`, `email`, `password`) VALUES
-(1, 'admin', 'ct001', 'yasinfaruk', '28', 'IT', '543', 'jpg.jpg', 'rahim@mail.com', '1234'),
-(2, 'employee', 'ct002', 'faruk', '29', 'Student', '343', 'faruk.JPG', 'yasin.faruk8585@gmai', '1234'),
-(3, 'admin', 'ct101', 'sujan', '22', 'IT', '124', 'happy.png', 'sujan@mail.com', '1234'),
-(4, 'Admin', 'CT004', 'mohammad faruk', '28', 'HR', '1313', '11401054_10340712532', 'yasinomarfaruk@gmail', '1234'),
-(5, 'Employee', 'CT005', 'faruk', '44', 'Mentor', '1313', '2072-665335-Category', 'rahim@mail.com', '2');
+(1, 'Admin', 'CT001', 'Rajesh Ghosh', '0', 'IT', '99999', '', 'rajesh@mail.com', '12345'),
+(2, 'Employee', 'CT002', 'Karim', '25', 'IT', '2000', '', 'karim@mail.com', '1234'),
+(3, 'Employee', 'CT003', 'FARUK', '0', 'IT', '99999', '', 'faruk@mail.com', '1234'),
+(4, 'Employee', 'CT004', 'mohammad faruk', '22', 'IT', '99999', '', 'mfaruk@mail.com', '1234'),
+(5, 'Employee', 'CT005', 'Rahim', '30', 'Student', '2000', '', 'rahim@mail.com', '12345'),
+(6, 'Employee', 'CT006', 'Rakib', '29', 'Mentor', '200', '394839.jpg', 'rakib@mail.com', '1234'),
+(7, 'Employee', 'CT007', 'Robi', '22', 'IT', '100', '', 'robi@mail.com', '12345'),
+(8, 'Employee', 'CT008', 'Sayema', '22', 'IT', '20', '', 'sayema@mail.com', '11111'),
+(9, 'Employee', 'CT009', 'Sabina', '29', 'IT', '200', '', 'sabina@mail.com', '22222'),
+(10, 'Employee', 'CT0010', 'Salma', '33', 'IT', '200', '', 'salma@mail.com', '33333');
 
 -- --------------------------------------------------------
 
@@ -64,23 +69,36 @@ CREATE TABLE IF NOT EXISTS `employee_time_in` (
   `time_out` varchar(15) NOT NULL,
   `role_time` varchar(10) NOT NULL,
   `reason` varchar(200) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee_time_in`
 --
 
 INSERT INTO `employee_time_in` (`id`, `e_id`, `date_value`, `time_in`, `time_out`, `role_time`, `reason`) VALUES
-(1, 'ct001', '2015-10-18', '13:49', '', 'timeIn', 'Sorry for today.'),
-(2, 'ct001', '2015-10-18', '13:49', '', 'timeOut', 'Sorry'),
-(3, 'ct002', '2015-10-18', '14:1', '', 'timeIn', 'Sick'),
-(4, 'ct002', '2015-10-18', '14:2', '', 'timeOut', 'Today I am sick'),
-(5, 'ct002', '2015-10-18', '14:14', '', 'timeIn', 'Sick for 3 days'),
-(6, 'ct002', '2015-10-18', '14:16', '', 'timeIn', 'sick for 3 days'),
-(7, 'ct002', '2015-10-18', '14:17', '', 'timeIn', 'busy with something'),
-(8, 'ct101', '2015-10-18', '19:4', '', 'Time In', ''),
-(9, 'ct101', '2015-10-18', '19:6', '', 'Time In', ''),
-(10, 'ct101', '2015-10-18', '19:14', '', 'Time In', '');
+(1, 'CT001', '2015-10-15', '13:49', '', 'timeIn', 'Sorry for today.'),
+(2, 'CT002', '2015-10-18', '9.00', '4.00', 'timeOut', 'Sorry'),
+(3, 'CT001', '2015-10-17', '14:1', '', 'timeIn', 'Sick'),
+(4, 'CT001', '2015-10-15', '14:2', '', 'timeOut', 'Today I am sick'),
+(5, 'CT002', '2015-10-17', '9.00', '3.00', 'timeIn', 'Sick for 3 days'),
+(6, 'CT002', '2015-10-16', '9.00', '2.50', 'timeIn', 'sick for 3 days'),
+(7, 'CT001', '2015-10-16', '14:17', '', 'timeIn', 'busy with something'),
+(8, 'CT003', '2015-10-15', '19:4', '', 'Time In', ''),
+(9, 'CT003', '2015-10-16', '19:6', '', 'Time In', ''),
+(10, 'CT003', '2015-10-17', '19:14', '', 'Time In', ''),
+(11, '', '2015-10-28', '6:57', '6:57', 'Time In', 'sorry for today'),
+(12, '5', '2015-10-28', '7:12', '7:12', 'Time In', 'sick'),
+(13, 'CT0010', '2015-10-23', '8:35', '8:38', 'Time In', 'Official work'),
+(14, 'CT0010', '2015-10-21', '8:35', '8:38', 'Time In', 'Official work'),
+(15, 'CT0010', '2015-10-20', '8:36', '8:38', 'Time In', 'Official work'),
+(16, 'CT0010', '2015-10-22', '8:36', '8:38', 'Time In', 'Official work'),
+(17, 'CT0010', '2015-10-30', '8:36', '8:38', 'Time In', 'Official work'),
+(18, 'CT0010', '2015-10-24', '8:36', '8:38', 'Time In', 'Official work'),
+(19, 'CT0010', '2015-10-25', '8:36', '8:38', 'Time In', 'Official work'),
+(20, 'CT0010', '2015-10-27', '8:37', '8:38', 'Time In', 'Official work'),
+(21, 'CT0010', '2015-10-28', '8:37', '8:38', 'Time In', 'Official work'),
+(22, 'CT0010', '2015-10-29', '8:37', '8:38', 'Time In', 'Official work'),
+(23, 'CT0010', '2015-10-26', '8:38', '8:38', 'Time In', 'Official work');
 
 -- --------------------------------------------------------
 
@@ -158,12 +176,12 @@ ALTER TABLE `working_hour`
 -- AUTO_INCREMENT for table `add_employee`
 --
 ALTER TABLE `add_employee`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `employee_time_in`
 --
 ALTER TABLE `employee_time_in`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `time_table`
 --
