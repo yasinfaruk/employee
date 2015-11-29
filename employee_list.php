@@ -12,17 +12,31 @@ $_SESSION['employee_id'] = $em_id;
 $_SESSION['user_email'] = $email;
 $_SESSION['user_password'] = $password;
 
-if(isset($_POST['search'])) {
-    
-    $view = "SELECT * FROM `add_employee` WHERE department='IT' OR department='Mentor' OR department='Student'";
-    $data = $dbconnection->query($view);
-    
-}else {
-   $view = "SELECT * FROM add_employee ";
-    $data = $dbconnection->query($view);
 
+
+
+
+if (isset($_POST['search']) && ($_POST['department'] == 'IT')) {
+
+    $view = "SELECT * FROM `add_employee` WHERE department='IT' ";
+    $data = $dbconnection->query($view);
+} elseif (isset($_POST['search']) && ($_POST['department'] == 'student')) {
+
+    $view = "SELECT * FROM `add_employee` WHERE department='Student' ";
+    $data = $dbconnection->query($view);
+} elseif (isset($_POST['search']) && ($_POST['department'] == 'mentor')) {
+
+    $view = "SELECT * FROM `add_employee` WHERE department='Mentor' ";
+    $data = $dbconnection->query($view);
+} elseif (isset($_POST['search']) && ($_POST['department'] == 'all')) {
+
+    $view = "SELECT * FROM `add_employee` ";
+    $data = $dbconnection->query($view);
+} else {
+
+    $view = "SELECT * FROM add_employee ";
+    $data = $dbconnection->query($view);
 }
- 
 ?>
 
 <!doctype html>
@@ -41,7 +55,7 @@ if(isset($_POST['search'])) {
     <body>
         <div class="row">
             <div class="col-md-7 col-md-offset-2">
-                
+
                 <!--======================== search =====================-->
                 <form action="#" method="POST" role="form" class="form-inline select-form">
                     <div class="row">
@@ -49,11 +63,11 @@ if(isset($_POST['search'])) {
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <select class="form-control" id="select" size="">
-                                    <option value="">IT</option>
-                                    <option value="">Student</option>
-                                    <option>Mentor</option>
-                                    <option>Manager</option>
+                                <select name="department" class="form-control" id="select">
+                                    <option value="all">All</option>
+                                    <option value="IT">IT</option>
+                                    <option value="student">Student</option>
+                                    <option value="mentor">Mentor</option>
                                 </select>
                                 <button type="submit" name="search" class="btn btn-default">Search</button>
                             </div>
@@ -82,12 +96,12 @@ if(isset($_POST['search'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        
-                    <?php
-                    $x = 0;
-                    while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
-                        $x++;
-                        ?>
+
+<?php
+$x = 0;
+while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
+    $x++;
+    ?>
                             <tr class="text-center">
                                 <td><?php echo $x; ?></td>
                                 <!--<td><?php echo $row['id'] ?></td>-->
@@ -97,7 +111,7 @@ if(isset($_POST['search'])) {
                                 <td><?php echo $row['age'] ?></td>
                                 <td><?php echo $row['department'] ?></td>
                                 <td><?php echo $row['salary'] ?></td>
-                <!--                    <td>--><?php //echo $row['image'] ?><!--</td>-->
+                <!--                    <td>--><?php //echo $row['image']    ?><!--</td>-->
                                 <td><?php echo $row['email'] ?></td>
                                 <td><?php echo $row['password'] ?></td>
                                 <td>
@@ -105,8 +119,8 @@ if(isset($_POST['search'])) {
                                     <span><a class="text-danger" href="update_employee.php?e_id=<?php echo $row['e_id'] ?>" style="                                        text-decoration: none;">Update</a></span>
                                 </td>
                             </tr>
-                    <?php } ?> 
-                            
+<?php } ?> 
+
                     </tbody>
                 </table>
             </div>
