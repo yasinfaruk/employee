@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
 
         while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
             $em_id = $row['e_id'];
-            echo ("<script>window.location='test.php?e_id=$em_id'</script>");
+            echo ("<script>window.location='employee_time_in.php?e_id=$em_id'</script>");
         }
     } else {
         echo "something wrong";

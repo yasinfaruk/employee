@@ -20,24 +20,14 @@ $_SESSION['user_email'] = $email;
 $_SESSION['user_password'] = $password;
 
 
-$today = date("Y-m-d");
-$days_ago = date('Y-m-d', strtotime('-5 days', strtotime($today)));
+//$today = date("Y-m-d");
+//$days_ago = date('Y-m-d', strtotime('-5 days', strtotime($today)));
 
-//echo $days_ago."<br>";
-//echo $today;
-//$view = "SELECT * FROM add_employee, employee_time_in WHERE add_employee.e_id='$em_id' AND employee_time_in.e_id='$em_id'";
 
-$view = "SELECT * FROM add_employee, employee_time_in, working_hour WHERE (date_value BETWEEN $today AND $days_ago) OR (add_employee.e_id='$em_id' AND employee_time_in.e_id='$em_id' AND working_hour.e_id='$em_id' )";
-//echo $view;die();
+$view = "SELECT * FROM add_employee, employee_time_in, working_hour WHERE add_employee.e_id='$em_id' AND employee_time_in.e_id='$em_id' AND working_hour.e_id='$em_id'";
+
 $data = $dbconnection->query($view);
 $row = $data->fetch(PDO::FETCH_ASSOC);
-
-//while ($row = $data->fetch(PDO::FETCH_ASSOC)){
-//    echo '<pre>';
-//print_r($row);
-//die();
-//}
-
 
 ?>
 
@@ -80,68 +70,49 @@ $row = $data->fetch(PDO::FETCH_ASSOC);
     </head>
     <body>
         <div class="row">
-            <!--    ============== view weeek =================-->
-            <!--            <div class="col-md-12 text-center">
-                            <form action="" class="form-inline week-form" method="POST" role="form">
-            
-                                <div class="form-group">
-                                    <label for=""></label>
-                                    <input type="text" class="form-control datepicker" name="" id="" placeholder="From">
-                                    <input type="text" class="form-control datepicker" name="" id="" placeholder="To">
-                                </div>
-            
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>-->
-            <!--============== end week ===============-->
-
-            <div class="col-md-7 col-md-offset-2 employee_part">
-                <div class="col-md-6">
-                    <div class="employee_info">                
-                        <span><em class="text-primary">Name : </em><small><?php echo $row['name'] ?></small></span><br>
-                        <span><em class="text-primary">E-ID : </em><small><?php echo $row['e_id'] ?></small></span><br>
-                        <span><em class="text-primary">Department : </em><small><?php echo $row['department'] ?></small></span><br>
-                        <span><em class="text-primary">Total Leave : </em><small><?php echo $row['role_employee'] ?></small></span><br>
-                        <span><em class="text-primary">Remaining Leave: </em><small><?php echo $row['salary'] ?></small></span><br>
+                       
+                <div class="col-md-7 col-md-offset-2 employee_part">
+                    <div class="col-md-6">
+                        <div class="employee_info">                
+                            <span><em class="text-primary">Name : </em><small><?php echo $row['name'] ?></small></span><br>
+                            <span><em class="text-primary">E-ID : </em><small><?php echo $row['e_id'] ?></small></span><br>
+                            <span><em class="text-primary">Department : </em><small><?php echo $row['department'] ?></small></span><br>
+                            <span><em class="text-primary">Total Leave : </em><small><?php echo 30; ?></small></span><br>
+                            <span><em class="text-primary">Remaining Leave: </em><small><?php echo $row['total_leave']; ?></small></span><br>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="https://goo.gl/KDsthX" class="employee-image pull-right" alt="yasinfaruk">
                     </div>
                 </div>
 
-
-
-                <div class="col-md-6">
-                    <img src="https://goo.gl/KDsthX" class="employee-image pull-right" alt="yasinfaruk">
-                </div>
-
-            </div>
-
-            <!--    ============= TABLE =============-->
-            <div class="col-md-11 info-table">
-                <div class="col-md-10 col-md-offset-1">
-                    <table class="table table-bordered table-hover">
-                        <thead class="text-center">
-                            <tr>
-                                <th class="text-center">SL</th>
-                                <th class="text-center">Date</th>
-                                <th class="text-center">Hour</th>
-                                <th class="text-center">Overtime</th>
-                                <th class="text-center">Less-time</th>
-                                <th class="text-center">Late-Come</th>
-                                <th class="text-center">Early-Going</th>
-                                <!--<th class="text-center">Overtime</th>-->
-                                <!--<th class="text-center">T-Present</th>-->
-                                <!--<th class="text-center">T-Absent</th>-->
-                                <!--<th class="text-center">T-Leave</th>-->
-                                <!--<th class="text-center">T-Hour</th>-->
-                                <!--<th class="text-center">Salary</th>-->
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <!--    ============= TABLE =============-->
+                <div class="col-md-11 info-table">
+                    <div class="col-md-10 col-md-offset-1">
+                        <table class="table table-bordered table-hover">
+                            <thead class="text-center">
+                                <tr>
+                                    <th class="text-center">SL</th>
+                                    <th class="text-center">Date</th>
+                                    <th class="text-center">Hour</th>
+                                    <th class="text-center">Overtime</th>
+                                    <th class="text-center">Less-time</th>
+                                    <th class="text-center">Late-Coming</th>
+                                    <th class="text-center">Early-Going</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                                                            
+                            <!--===================== php-code-start ==========================-->
+                            <tbody>
                             <?php
-                            $i = 0;
-                            while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
-                                ++$i;
-                                ?>
+                                 $i = 0;
+                                 while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
+                                     ++$i;
+                                     
+                                     $total_leave = $row['total_leave'];
+                             ?>
+
                                 <tr class="text-center">
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $row['date_value'] ?></td>
@@ -153,26 +124,24 @@ $row = $data->fetch(PDO::FETCH_ASSOC);
                                         <?php
                                         echo "--";
                                         ?>
-                                    </td><td>
-                                        <?php
-                                        echo "--";
-                                        ?>
-                                    </td><td>
+                                    </td>
+                                    <td>
                                         <?php
                                         echo "--";
                                         ?>
                                     </td>
-
-
-
                                     <td><a href="">view</a></td>
                                 </tr>
-                            <?php } ?>
+                                
+                                <!--======================= end-php-code ======================-->
+                                <?php } ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        
+        
         <!--=================== jquery ==================-->
         <script src="js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

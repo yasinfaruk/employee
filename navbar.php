@@ -19,7 +19,7 @@
             color: white;
         }
         #navigation > ul{
-            margin-left: 30%;
+            margin-left: 25%;
             position: relative;
         }
         #navigation > ul > li{
@@ -31,7 +31,7 @@
             border-left: none;
         }
         #navigation > ul > li > a{
-            color: grey;
+            color: orangered;
             transition: 0.3s;
             -webkit-transition: 0.3s;
             font-size: 15px;
