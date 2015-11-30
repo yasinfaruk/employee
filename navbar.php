@@ -64,8 +64,9 @@
         		<ul class="nav navbar-nav">
         			<li><a href="#">Home</a></li>
                                 <li><a href="add_employee.php">Add Employee</a></li>
-        			<!--<li><a href="#">Employee List</a></li>-->
-        			<!--<li><a href="#">Accounts</a></li>-->
+                                <li><a href="employee_list.php">Employee List</a></li>
+                                <li><a href="leave_management.php">Leave Manage</a></li>
+                                <li><a href="accounts.php">Accounts</a></li>
                                 <li><a href="logout.php">Logout</a></li>
         		</ul>
 

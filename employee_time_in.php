@@ -8,6 +8,7 @@
 error_reporting('no');
 session_start();
 
+$emloyee_id = $_GET['e_id'];
 $_SESSION['employee_id'] = $em_id;
 $_SESSION['user_email'] = $email;
 $_SESSION['user_password'] = $password;
@@ -28,9 +29,11 @@ if (isset($_POST['submit'])  && ($_POST['role_time']=='Time In')) {
     $reason = $_POST['reason'];
 
 
-    $insert = "INSERT INTO `employee_time_in`(`e_id`, `date_value`, `time_in`, `time_out`, `role_time`, `reason`) VALUES ('$em_id', '$date_value', '$time_in', '$time_out', '$role_time', '$reason')";
+    $insert = "INSERT INTO `employee_time_in`(`e_id`, `date_value`, `time_in`, `time_out`, `role_time`, `reason`) VALUES ('$em_id', CURDATE(), '$time_in', '$time_out', '$role_time', '$reason')";
     $preparestatement = $dbconnection->prepare($insert);
     $preparestatement->execute();
+    
+    echo '<script>alert("You are present at office.");</script>';
 }
 else if(isset($_POST['submit'])  && ($_POST['role_time']=='Time Out'))
 {
